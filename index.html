@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soluciones Empresariales - Tu Aliado en Afiliación a EPS</title>
+    <title>Soluciones Empresariales - ¡Afíliate hoy y asegura tu bienestar!</title>
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -26,7 +35,6 @@
             color: var(--dark);
         }
 
-        /* Header */
         header {
             background: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -67,7 +75,6 @@
             color: var(--primary);
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: var(--white);
@@ -103,7 +110,12 @@
             box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
         }
 
-        /* Stats Section */
+        .cta-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .stats {
             background: var(--white);
             padding: 3rem 2rem;
@@ -131,7 +143,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Section */
         section {
             max-width: 1200px;
             margin: 0 auto;
@@ -145,7 +156,6 @@
             color: var(--dark);
         }
 
-        /* Services */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -175,7 +185,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Form Section */
         .form-container {
             background: var(--light);
             padding: 3rem;
@@ -207,7 +216,51 @@
             min-height: 120px;
         }
 
-        /* FAQ */
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #3b82f6;
+        }
+
+        .whatsapp-button {
+            background: #25D366;
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-button:hover {
+            background: #128C7E;
+        }
+
         .faq-container {
             max-width: 800px;
             margin: 0 auto;
@@ -247,7 +300,6 @@
             max-height: 500px;
         }
 
-        /* Blog */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -277,7 +329,6 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Testimonials */
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -302,7 +353,6 @@
             color: var(--primary);
         }
 
-        /* Footer */
         footer {
             background: var(--dark);
             color: var(--white);
@@ -335,7 +385,6 @@
             opacity: 1;
         }
 
-        /* Login Modal */
         .modal {
             display: none;
             position: fixed;
@@ -357,8 +406,10 @@
             background: var(--white);
             padding: 2rem;
             border-radius: 10px;
-            max-width: 400px;
+            max-width: 900px;
             width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .close-modal {
@@ -379,13 +430,127 @@
             font-size: 1.5rem;
             color: var(--primary);
         }
+
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .solicitud-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .solicitud-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .estado-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .estado-revision {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .estado-aprobado {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .estado-rechazado {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-secondary {
+            background: var(--dark);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">🏥 Servicios Empresariales</div>
+            <div class="logo">🏥 Soluciones Empresariales</div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
@@ -394,14 +559,14 @@
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
                 <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#" onclick="openModal()">Portal Cliente</a></li>
+                <li><a href="#" onclick="openPortalModal()">Portal Cliente</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
-        <h1>Tu Afiliación a EPS Simplificada</h1>
+        <h1>Tu Afiliación a EPS </h1>
         <p>Asesoría experta y trámites rápidos para tu seguridad social</p>
         <button class="cta-button" onclick="document.getElementById('afiliacion').scrollIntoView({behavior: 'smooth'})">Afiliarme Ahora</button>
     </section>
@@ -486,53 +651,57 @@
     <section id="afiliacion">
         <h2>Formulario de Afiliación</h2>
         <div class="form-container">
-            <form id="affiliateForm">
+            <form id="affiliateForm" onsubmit="handleAffiliateSubmit(event)">
                 <div class="form-group">
                     <label>Tipo de Documento *</label>
-                    <select required>
+                    <select name="tipoDocumento" required>
                         <option value="">Seleccione...</option>
-                        <option>Cédula de Ciudadanía</option>
-                        <option>Cédula de Extranjería</option>
-                        <option>Tarjeta de Identidad</option>
-                        <option>Pasaporte</option>
+                        <option value="CC">Cédula de Ciudadanía</option>
+                        <option value="CE">Cédula de Extranjería</option>
+                        <option value="TI">Tarjeta de Identidad</option>
+                        <option value="PA">Pasaporte</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Número de Documento *</label>
-                    <input type="text" required placeholder="Ingrese su número de documento">
+                    <input type="text" name="numeroDocumento" required placeholder="Ingrese su número de documento">
                 </div>
                 <div class="form-group">
                     <label>Nombres Completos *</label>
-                    <input type="text" required placeholder="Ingrese sus nombres">
+                    <input type="text" name="nombres" required placeholder="Ingrese sus nombres">
                 </div>
                 <div class="form-group">
                     <label>Apellidos Completos *</label>
-                    <input type="text" required placeholder="Ingrese sus apellidos">
+                    <input type="text" name="apellidos" required placeholder="Ingrese sus apellidos">
                 </div>
                 <div class="form-group">
                     <label>Correo Electrónico *</label>
-                    <input type="email" required placeholder="correo@ejemplo.com">
+                    <input type="email" name="email" required placeholder="correo@ejemplo.com">
                 </div>
                 <div class="form-group">
                     <label>Teléfono/Celular *</label>
-                    <input type="tel" required placeholder="300 123 4567">
+                    <input type="tel" name="telefono" required placeholder="3001234567">
                 </div>
                 <div class="form-group">
                     <label>Tipo de Trámite *</label>
-                    <select required>
+                    <select name="tipoTramite" required>
                         <option value="">Seleccione...</option>
-                        <option>Nueva Afiliación</option>
-                        <option>Traslado de EPS</option>
-                        <option>Afiliación de Beneficiario</option>
-                        <option>Actualización de Datos</option>
+                        <option value="nueva">Nueva Afiliación</option>
+                        <option value="traslado">Traslado de EPS</option>
+                        <option value="beneficiario">Afiliación de Beneficiario</option>
+                        <option value="actualizacion">Actualización de Datos</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Observaciones</label>
-                    <textarea placeholder="Cuéntanos más sobre tu solicitud..."></textarea>
+                    <textarea name="observaciones" placeholder="Cuéntanos más sobre tu solicitud..."></textarea>
                 </div>
                 <button type="submit" class="cta-button" style="width: 100%;">Enviar Solicitud</button>
+                <button type="button" class="whatsapp-button" onclick="sendWhatsApp()">
+                    📱 Enviar por WhatsApp
+                </button>
             </form>
+            <div id="formMessage" style="margin-top: 1rem; display: none;"></div>
         </div>
     </section>
 
@@ -650,14 +819,14 @@
                     <span class="contact-icon">📞</span>
                     <div>
                         <strong>Teléfono</strong><br>
-                        +57 316 1842153
+                        +57 601 234 5678
                     </div>
                 </div>
                 <div class="contact-info">
                     <span class="contact-icon">📧</span>
                     <div>
                         <strong>Email</strong><br>
-                        Sempresariales42@gmail.com
+                        info@afiliafacil.com
                     </div>
                 </div>
                 <div class="contact-info">
@@ -678,26 +847,26 @@
             
             <div class="form-container">
                 <h3 style="margin-bottom: 1.5rem; text-align: center;">Envíanos un Mensaje</h3>
-                <form>
+                <form id="contactForm" action="https://formspree.io/f/TU_FORMSPREE_ID" method="POST">
                     <div class="form-group">
                         <label>Nombre Completo *</label>
-                        <input type="text" required>
+                        <input type="text" name="nombre" required>
                     </div>
                     <div class="form-group">
                         <label>Email *</label>
-                        <input type="email" required>
+                        <input type="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label>Teléfono</label>
-                        <input type="tel">
+                        <input type="tel" name="telefono">
                     </div>
                     <div class="form-group">
                         <label>Asunto *</label>
-                        <input type="text" required>
+                        <input type="text" name="asunto" required>
                     </div>
                     <div class="form-group">
                         <label>Mensaje *</label>
-                        <textarea required></textarea>
+                        <textarea name="mensaje" required></textarea>
                     </div>
                     <button type="submit" class="cta-button" style="width: 100%;">Enviar Mensaje</button>
                 </form>
@@ -709,7 +878,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>AfiliaFácil</h3>
+                <h3>Soluciones Empresariales</h3>
                 <p>Tu aliado confiable en el acceso al sistema de salud colombiano.</p>
             </div>
             <div class="footer-section">
@@ -721,9 +890,9 @@
             </div>
             <div class="footer-section">
                 <h3>Contacto</h3>
-                <p>📞 +57 316 184 2153</p>
+                <p>📞 +57 316 1842153 / +57 316 0778103</p>
                 <p>📧 Sempresariales42@gmail.com</p>
-                <p>📍 Calle 100 #19-50, Bogotá</p>
+                <p>📍 Calle 100 #19-50, Cali - Valle del Cauca</p>
             </div>
             <div class="footer-section">
                 <h3>Síguenos</h3>
@@ -734,37 +903,496 @@
             </div>
         </div>
         <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p>&copy; 2025 Soluciones Empresariales Todos los derechos reservados.</p>
+            <p>&copy; 2025 Soluciones Empresariales - Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
+    <!-- Portal Cliente Modal -->
+    <div id="portalModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 style="margin-bottom: 1.5rem;">Portal del Cliente</h2>
-            <form>
-                <div class="form-group">
-                    <label>Correo Electrónico</label>
-                    <input type="email" required>
+            <span class="close-modal" onclick="closePortalModal()">&times;</span>
+            
+            <!-- Login/Register -->
+            <div id="loginSection">
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('login')">Iniciar Sesión</button>
+                    <button class="tab" onclick="showTab('register')">Registrarse</button>
                 </div>
-                <div class="form-group">
-                    <label>Contraseña</label>
-                    <input type="password" required>
+
+                <div id="loginTab" class="tab-content active">
+                    <h2 style="margin-bottom: 1.5rem;">Iniciar Sesión</h2>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" name="password" required>
+                        </div>
+                        <button type="submit" class="cta-button" style="width: 100%;">Iniciar Sesión</button>
+                        <p style="text-align: center; margin-top: 1rem;">
+                            <a href="#" style="color: var(--primary);">¿Olvidaste tu contraseña?</a>
+                        </p>
+                    </form>
                 </div>
-                <button type="submit" class="cta-button" style="width: 100%;">Iniciar Sesión</button>
-                <p style="text-align: center; margin-top: 1rem;">
-                    <a href="#" style="color: var(--primary);">¿Olvidaste tu contraseña?</a>
-                </p>
-                <p style="text-align: center; margin-top: 0.5rem;">
-                    ¿No tienes cuenta? <a href="#" style="color: var(--primary);">Regístrate aquí</a>
-                </p>
-            </form>
+
+                <div id="registerTab" class="tab-content">
+                    <h2 style="margin-bottom: 1.5rem;">Crear Cuenta</h2>
+                    <form onsubmit="handleRegister(event)">
+                        <div class="form-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña</label>
+                            <input type="password" name="password" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmar Contraseña</label>
+                            <input type="password" name="confirmPassword" required minlength="6">
+                        </div>
+                        <button type="submit" class="cta-button" style="width: 100%;">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div id="dashboardSection" class="dashboard">
+                <div class="dashboard-header">
+                    <div>
+                        <h2>Portal del Cliente</h2>
+                        <p style="color: #6b7280;">Bienvenido, <span id="userName"></span></p>
+                    </div>
+                    <button class="btn-secondary" onclick="handleLogout()">Cerrar Sesión</button>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="showDashboardTab('solicitudes')">Mis Solicitudes</button>
+                    <button class="tab" onclick="showDashboardTab('perfil')">Mi Perfil</button>
+                </div>
+
+                <div id="solicitudesTab" class="tab-content active">
+                    <h3 style="margin-bottom: 1.5rem;">Mis Solicitudes</h3>
+                    <div id="solicitudesList"></div>
+                </div>
+
+                <div id="perfilTab" class="tab-content">
+                    <h3 style="margin-bottom: 1.5rem;">Información Personal</h3>
+                    <div id="perfilInfo"></div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // FAQ Toggle
+        // ============================================
+        // CONFIGURACIÓN - REEMPLAZA CON TUS DATOS
+        // ============================================
+        
+        // EmailJS Config - Obtén estos valores en emailjs.com
+        const EMAILJS_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI';
+        const EMAILJS_SERVICE_ID = 'TU_SERVICE_ID_AQUI';
+        const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID_AQUI';
+        
+        // Firebase Config - Obtén estos valores en console.firebase.google.com
+        const firebaseConfig = {
+            apiKey: "TU_API_KEY_AQUI",
+            authDomain: "TU_PROJECT.firebaseapp.com",
+            projectId: "TU_PROJECT_ID",
+            storageBucket: "TU_PROJECT.appspot.com",
+            messagingSenderId: "TU_SENDER_ID",
+            appId: "TU_APP_ID"
+        };
+        
+        // WhatsApp Business Number (formato: 57XXXXXXXXXX)
+        const WHATSAPP_NUMBER = "573001234567";
+        
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        
+        // Inicializar EmailJS
+        if (EMAILJS_PUBLIC_KEY !== 'TU_PUBLIC_KEY_AQUI') {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        }
+        
+        // Inicializar Firebase
+        let db = null;
+        let auth = null;
+        if (firebaseConfig.apiKey !== 'TU_API_KEY_AQUI') {
+            firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            auth = firebase.auth();
+        }
+        
+        // ============================================
+        // FUNCIONES DE FORMULARIO DE AFILIACIÓN
+        // ============================================
+        
+        async function handleAffiliateSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const messageDiv = document.getElementById('formMessage');
+            
+            // Deshabilitar botón
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+            
+            // Convertir FormData a objeto
+            const data = {
+                tipoDocumento: formData.get('tipoDocumento'),
+                numeroDocumento: formData.get('numeroDocumento'),
+                nombres: formData.get('nombres'),
+                apellidos: formData.get('apellidos'),
+                email: formData.get('email'),
+                telefono: formData.get('telefono'),
+                tipoTramite: formData.get('tipoTramite'),
+                observaciones: formData.get('observaciones'),
+                fecha: new Date().toLocaleDateString('es-CO'),
+                hora: new Date().toLocaleTimeString('es-CO'),
+                estado: 'En Revisión',
+                radicado: 'RAD-' + Date.now()
+            };
+            
+            messageDiv.style.display = 'block';
+            messageDiv.className = 'alert alert-info';
+            messageDiv.innerHTML = '⏳ Procesando tu solicitud...';
+            
+            try {
+                // 1. Enviar por EmailJS
+                if (EMAILJS_SERVICE_ID !== 'TU_SERVICE_ID_AQUI') {
+                    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                        to_email: 'info@afiliafacil.com',
+                        from_name: `${data.nombres} ${data.apellidos}`,
+                        from_email: data.email,
+                        telefono: data.telefono,
+                        documento: `${data.tipoDocumento} - ${data.numeroDocumento}`,
+                        tramite: data.tipoTramite,
+                        observaciones: data.observaciones,
+                        radicado: data.radicado,
+                        fecha: data.fecha
+                    });
+                }
+                
+                // 2. Guardar en Firebase
+                if (db) {
+                    await db.collection('solicitudes').add(data);
+                }
+                
+                // 3. Guardar en localStorage (backup)
+                const solicitudes = JSON.parse(localStorage.getItem('solicitudes') || '[]');
+                solicitudes.push(data);
+                localStorage.setItem('solicitudes', JSON.stringify(solicitudes));
+                
+                // Mostrar mensaje de éxito
+                messageDiv.className = 'alert alert-success';
+                messageDiv.innerHTML = `
+                    ✅ <strong>¡Solicitud enviada exitosamente!</strong><br>
+                    Número de radicado: <strong>${data.radicado}</strong><br>
+                    Te contactaremos a <strong>${data.email}</strong> en las próximas 24-48 horas.<br>
+                    Puedes consultar el estado de tu solicitud en el Portal del Cliente.
+                `;
+                
+                // Limpiar formulario
+                form.reset();
+                
+                // Ocultar mensaje después de 10 segundos
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 10000);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                messageDiv.className = 'alert alert-error';
+                messageDiv.innerHTML = `
+                    ❌ <strong>Error al enviar la solicitud</strong><br>
+                    ${error.message}<br>
+                    Por favor, intenta nuevamente o contáctanos por WhatsApp.
+                `;
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar Solicitud';
+            }
+        }
+        
+        // ============================================
+        // WHATSAPP
+        // ============================================
+        
+        function sendWhatsApp() {
+            const form = document.getElementById('affiliateForm');
+            const formData = new FormData(form);
+            
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const mensaje = `
+*Nueva Solicitud de Afiliación EPS*
+
+📋 *Datos Personales:*
+• Tipo Doc: ${formData.get('tipoDocumento')}
+• Número: ${formData.get('numeroDocumento')}
+• Nombre: ${formData.get('nombres')} ${formData.get('apellidos')}
+
+📧 *Contacto:*
+• Email: ${formData.get('email')}
+• Teléfono: ${formData.get('telefono')}
+
+🏥 *Trámite:*
+• Tipo: ${formData.get('tipoTramite')}
+
+💬 *Observaciones:*
+${formData.get('observaciones') || 'Ninguna'}
+            `.trim();
+            
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+        
+        // ============================================
+        // PORTAL DEL CLIENTE
+        // ============================================
+        
+        function openPortalModal() {
+            document.getElementById('portalModal').classList.add('active');
+            checkUserSession();
+        }
+        
+        function closePortalModal() {
+            document.getElementById('portalModal').classList.remove('active');
+        }
+        
+        function showTab(tabName) {
+            document.querySelectorAll('#loginSection .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#loginSection .tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+        
+        function showDashboardTab(tabName) {
+            document.querySelectorAll('#dashboardSection .tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#dashboardSection .tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            if (tabName === 'solicitudes') {
+                loadSolicitudes();
+            } else if (tabName === 'perfil') {
+                loadPerfil();
+            }
+        }
+        
+        async function handleLogin(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            try {
+                if (auth) {
+                    await auth.signInWithEmailAndPassword(email, password);
+                } else {
+                    // Simulación local
+                    const users = JSON.parse(localStorage.getItem('users') || '{}');
+                    if (users[email] && users[email].password === password) {
+                        localStorage.setItem('currentUser', JSON.stringify(users[email]));
+                    } else {
+                        throw new Error('Credenciales incorrectas');
+                    }
+                }
+                
+                showDashboard();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+        
+        async function handleRegister(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const nombre = formData.get('nombre');
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            try {
+                if (auth) {
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                    await userCredential.user.updateProfile({ displayName: nombre });
+                } else {
+                    // Simulación local
+                    const users = JSON.parse(localStorage.getItem('users') || '{}');
+                    users[email] = { nombre, email, password };
+                    localStorage.setItem('users', JSON.stringify(users));
+                    localStorage.setItem('currentUser', JSON.stringify({ nombre, email }));
+                }
+                
+                alert('¡Registro exitoso!');
+                showDashboard();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+        
+        function handleLogout() {
+            if (auth) {
+                auth.signOut();
+            }
+            localStorage.removeItem('currentUser');
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('dashboardSection').classList.remove('active');
+        }
+        
+        function checkUserSession() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            
+            if (currentUser || (auth && auth.currentUser)) {
+                showDashboard();
+            } else {
+                document.getElementById('loginSection').style.display = 'block';
+                document.getElementById('dashboardSection').classList.remove('active');
+            }
+        }
+        
+        function showDashboard() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const user = currentUser || (auth && auth.currentUser);
+            
+            if (user) {
+                document.getElementById('userName').textContent = user.nombre || user.displayName || user.email;
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').classList.add('active');
+                loadSolicitudes();
+            }
+        }
+        
+        async function loadSolicitudes() {
+            const container = document.getElementById('solicitudesList');
+            container.innerHTML = '<p>Cargando solicitudes...</p>';
+            
+            try {
+                let solicitudes = [];
+                
+                if (db) {
+                    const snapshot = await db.collection('solicitudes').orderBy('fecha', 'desc').get();
+                    solicitudes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                } else {
+                    solicitudes = JSON.parse(localStorage.getItem('solicitudes') || '[]');
+                }
+                
+                if (solicitudes.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; color: #6b7280;">No tienes solicitudes registradas</p>';
+                    return;
+                }
+                
+                container.innerHTML = solicitudes.map(sol => `
+                    <div class="solicitud-card">
+                        <div class="solicitud-header">
+                            <div>
+                                <strong>Radicado: ${sol.radicado}</strong><br>
+                                <small style="color: #6b7280;">${sol.fecha} - ${sol.hora || ''}</small>
+                            </div>
+                            <span class="estado-badge estado-${sol.estado.toLowerCase().replace(' ', '-')}">${sol.estado}</span>
+                        </div>
+                        <div>
+                            <p><strong>Tipo de Trámite:</strong> ${sol.tipoTramite}</p>
+                            <p><strong>Nombre:</strong> ${sol.nombres} ${sol.apellidos}</p>
+                            <p><strong>Documento:</strong> ${sol.tipoDocumento} ${sol.numeroDocumento}</p>
+                            <p><strong>Email:</strong> ${sol.email}</p>
+                            <p><strong>Teléfono:</strong> ${sol.telefono}</p>
+                            ${sol.observaciones ? `<p><strong>Observaciones:</strong> ${sol.observaciones}</p>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error cargando solicitudes:', error);
+                container.innerHTML = '<p class="alert alert-error">Error al cargar las solicitudes</p>';
+            }
+        }
+        
+        function loadPerfil() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const user = currentUser || (auth && auth.currentUser);
+            const container = document.getElementById('perfilInfo');
+            
+            if (user) {
+                container.innerHTML = `
+                    <div class="solicitud-card">
+                        <p><strong>Nombre:</strong> ${user.nombre || user.displayName || 'No especificado'}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Cuenta creada:</strong> ${user.metadata ? new Date(user.metadata.creationTime).toLocaleDateString('es-CO') : 'No disponible'}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // ============================================
+        // FAQ
+        // ============================================
+        
         function toggleFAQ(element) {
             const answer = element.nextElementSibling;
-            const isActive = answer.classList
+            const isActive = answer.classList.contains('active');
+            
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                answer.classList.add('active');
+            }
+        }
+        
+        // ============================================
+        // EVENTOS
+        // ============================================
+        
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('portalModal');
+            if (event.target == modal) {
+                closePortalModal();
+            }
+        }
+        
+        // Verificar sesión al cargar
+        if (auth) {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        nombre: user.displayName,
+                        email: user.email,
+                        metadata: user.metadata
+                    }));
+                }
+            });
+        }
+    </script>
+</body>
+</html>
