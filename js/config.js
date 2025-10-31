@@ -60,8 +60,8 @@ const COMPANY_EMAIL = "Sempresariales42@gmail.com";
 // ============================================
 
 // Inicializar EmailJS
-if (EMAILJS_PUBLIC_KEY !== 'TU_PUBLIC_KEY_AQUI') {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+if (EMAILJS_PUBLIC_KEY !== 'Jq8M5BiGBRUUit3qg') {
+    emailjs.init(Jq8M5BiGBRUUit3qg);
 }
 
 // Inicializar Firebase
