@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     
     <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -168,7 +168,7 @@
         <p style="text-align: center; color: #6b7280; margin-bottom: 2rem;">Descubre cómo podemos ayudarte</p>
         <div class="video-container">
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/7h2ryr_uUEs?si=jnuTPfXYgSFDmGYq" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"></iframe>
+                <iframe src="https://www.youtube.com/embed/reECTnCoUQs?si=eV21_qInrr7XbJ6_" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"></iframe>
             </div>
         </div>
     </section>
@@ -359,7 +359,9 @@
                     <span class="contact-icon">📍</span>
                     <div>
                         <strong>Dirección</strong><br>
-                        Calle 100 #19-50, Bogotá
+                        Cra 98# 60-96 Valle de Lili, 
+                        Santiago de Cali
+                        Valle del Cauca
                     </div>
                 </div>
                 <div class="contact-info">
@@ -374,25 +376,26 @@
             <div class="form-container">
                 <h3 style="margin-bottom: 1.5rem; text-align: center;">Envíanos un Mensaje</h3>
                 <form id="contactForm" action="https://formspree.io/f/TU_FORMSPREE_ID" method="POST">
+                <!-- <form id="contactForm" action="https://formspree.io/f/TU_FORMSPREE_ID" method="POST"> -->
                     <div class="form-group">
-                        <label>Nombre Completo *</label>
-                        <input type="text" name="nombre" required>
+                        <label>Nombre *</label>
+                        <input type="text" name="nombre" id="nombre" required>
                     </div>
                     <div class="form-group">
                         <label>Email *</label>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email" id="email" required>
                     </div>
                     <div class="form-group">
                         <label>Teléfono</label>
-                        <input type="tel" name="telefono">
+                        <input type="tel" name="telefono" id="telefono">
                     </div>
                     <div class="form-group">
                         <label>Asunto *</label>
-                        <input type="text" name="asunto" required>
+                        <input type="text" name="asunto" id="asunto" required>
                     </div>
                     <div class="form-group">
                         <label>Mensaje *</label>
-                        <textarea name="mensaje" required></textarea>
+                        <textarea name="mensaje" id="mensaje" required></textarea>
                     </div>
                     <button type="submit" class="cta-button" style="width: 100%;">Enviar Mensaje</button>
                 </form>
@@ -494,18 +497,19 @@
                 <h3>Contacto</h3>
                 <p>📞 +57 316 1842153 / +57 316 0778103</p>
                 <p>📧 Sempresariales42@gmail.com</p>
-                <p>📍 Calle 100 #19-50, Santiago de Cali - Valle del Cauca</p>
+                <p>📍 Cra 98# 60-96 Valle de Lili</p>
+                <p>📍 Santiago de Cali - Valle del Cauca</p>
             </div>
             <div class="footer-section">
                 <h3>Síguenos</h3>
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
+                <a href="https://www.facebook.com/Dayana Zapata/">Facebook</a>
+                <a href="https://www.instagram.com/Soluempresarial20/">Instagram</a>
                 <a href="#">Twitter</a>
                 <a href="#">LinkedIn</a>
             </div>
         </div>
         <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p>&copy; 2025 Soluciones Empresariales - Ambar Z - Todos los derechos reservados.</p>
+            <p>&copy; 2025 Soluciones Empresariales - Ambar Zapata - Todos los derechos reservados.</p>
         </div>
     </footer>
 
