@@ -10,6 +10,10 @@
     
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        emailjs.init('Jq8M5BiGBRUUit3qg')
+    </script>
     
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
@@ -375,7 +379,7 @@
             
             <div class="form-container">
                 <h3 style="margin-bottom: 1.5rem; text-align: center;">Envíanos un Mensaje</h3>
-                <form id="contactForm" action="https://formspree.io/f/TU_FORMSPREE_ID" method="POST">
+                <form id="contactForm">
                 <!-- <form id="contactForm" action="https://formspree.io/f/TU_FORMSPREE_ID" method="POST"> -->
                     <div class="form-group">
                         <label>Nombre *</label>
@@ -397,7 +401,7 @@
                         <label>Mensaje *</label>
                         <textarea name="mensaje" id="mensaje" required></textarea>
                     </div>
-                    <button type="submit" class="cta-button" style="width: 100%;">Enviar Mensaje</button>
+                    <button type="submit" class="cta-button" id="button_contact" value="Send Email" style="width: 100%;">Enviar Mensaje</button>
                 </form>
             </div>
         </div>
