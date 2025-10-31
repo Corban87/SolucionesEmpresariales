@@ -3,9 +3,31 @@
 // ============================================
 
 // EmailJS Config - Obtén estos valores en emailjs.com
-const EMAILJS_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI';
-const EMAILJS_SERVICE_ID = 'TU_SERVICE_ID_AQUI';
-const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID_AQUI';
+// const EMAILJS_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI';
+// const EMAILJS_SERVICE_ID = 'TU_SERVICE_ID_AQUI';
+// const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID_AQUI';
+
+const btn = document.getElementById('button_contact');
+
+document.getElementById('contactForm')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Enviando...';
+
+   const serviceID = 'default_service';
+   const templateID = 'template_g4dqdor';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Send Email';
+      alert('Enviado!');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
+
 
 // Firebase Config - Obtén estos valores en console.firebase.google.com
 const firebaseConfig = {
