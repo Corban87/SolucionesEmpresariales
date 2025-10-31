@@ -6,8 +6,8 @@
 const EMAILJS_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI';
 const EMAILJS_SERVICE_ID = 'default_service';
 const EMAILJS_TEMPLATE_ID = 'template_g4dqdor';
-// const EMAILJS_SERVICE_ID = 'TU_SERVICE_ID_AQUI';
-// const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID_AQUI';
+// const serviceID = 'default_service';
+// const templateID = 'template_g4dqdor';;
 
 const btn = document.getElementById('button_contact');
 
@@ -19,7 +19,7 @@ document.getElementById('contactForm')
 
    
 
-   emailjs.sendForm(serviceID, templateID, this)
+   emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
     .then(() => {
       btn.value = 'Send Email';
       alert('Enviado!');
