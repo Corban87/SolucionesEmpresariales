@@ -3,9 +3,8 @@
 // ============================================
 
 // EmailJS Config - Obtén estos valores en emailjs.com
-const EMAILJS_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI';
-const EMAILJS_SERVICE_ID = 'default_service';
-const EMAILJS_TEMPLATE_ID = 'template_g4dqdor';
+const EMAILJS_PUBLIC_KEY = 'Jq8M5BiGBRUUit3qg';
+
 // const serviceID = 'default_service';
 // const templateID = 'template_g4dqdor';;
 
@@ -16,8 +15,9 @@ document.getElementById('contactForm')
    event.preventDefault();
 
    btn.value = 'Enviando...';
-
-   
+  
+  const EMAILJS_SERVICE_ID = 'default_service';
+  const EMAILJS_TEMPLATE_ID = 'template_g4dqdor';
 
    emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
     .then(() => {
