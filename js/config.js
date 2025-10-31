@@ -31,14 +31,23 @@ document.getElementById('contactForm')
 
 
 // Firebase Config - Obtén estos valores en console.firebase.google.com
+
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
 const firebaseConfig = {
-    apiKey: "TU_API_KEY_AQUI",
-    authDomain: "TU_PROJECT.firebaseapp.com",
-    projectId: "TU_PROJECT_ID",
-    storageBucket: "TU_PROJECT.appspot.com",
-    messagingSenderId: "TU_SENDER_ID",
-    appId: "TU_APP_ID"
+  apiKey: "AIzaSyBXJ9XuwHRgYt56Z-hFWK5gwAxAlF7qwAg",
+  authDomain: "soluciones-empresariales42.firebaseapp.com",
+  projectId: "soluciones-empresariales42",
+  storageBucket: "soluciones-empresariales42.firebasestorage.app",
+  messagingSenderId: "449506203065",
+  appId: "1:449506203065:web:17bf3564d0ae852a4c1268",
+  measurementId: "G-MLMS8RQ2X7"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 // WhatsApp Business Number (formato: 57XXXXXXXXXX)
 const WHATSAPP_NUMBER = "573161842153";
